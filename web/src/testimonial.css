@@ -10,9 +10,10 @@
 
 .testimonial-items {
     display: flex;
-    flex-direction: row;
     background: var(--clr-light);
-    flex-flow: column wrap;
+    flex-wrap: wrap;
+    width: 50%;
+    flex-direction: row;
     align-items: flex-start;
-    max-width: 300px;
+    max-width: 500px;
 }
