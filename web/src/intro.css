@@ -1,0 +1,43 @@
+:root {
+    --clr-dark: #2f0909; 
+    --clr-light: white; 
+
+    --fs-large: 2.5em;
+    --fs-medium: 2em;
+    --fs-small: 1em;
+}
+
+.title {
+    color: var(--clr-light);
+    text-align: center;
+    margin-top: 200px;
+    margin-bottom: 100px;
+    font-size: var(--fs-large);
+}
+
+.inputArea {
+    text-align: center;
+}
+
+.inquiry-prompt {
+    font-size: var(--fs-medium);
+}
+
+.inquiry-textarea { 
+    min-width: 500px;
+    min-height: 100px;
+    margin-bottom: -1.5em;
+    margin-left: 4em;
+    background-color: var(--clr-light);
+    font-size: var(--fs-medium);
+}
+
+.btn {
+    padding: 1em;
+    border-radius: 10px;
+    border-color: transparent;
+    background-color: var(--clr-light);
+    color: var(--clr-dark);
+    margin-left: 2em;
+}
+
