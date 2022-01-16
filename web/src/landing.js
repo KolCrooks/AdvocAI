@@ -20,12 +20,26 @@ export default function Landing() {
     const [state, setState] = useState(0);
     const incState = () => setState(state+1);
     const messages = [
-        "Hello World!",
+        "I’m AdvocAI, your AI advocate.",
+        "Using the advice of thousands of internet commenters, I've been built to give you legal advice.",
+        "I mean, not sure why you’d go to a lawyer in the first place… unless you’re into the pretentious suits and overpriced rates.",
+        "Let’s get down to business… could you briefly describe your legal issues for me?",
+        "You don’t need to go into a ton of detail, I just need enough to know what sort of mess you got yourself into.",
         "<input>",
-        "I am a robot",
-        "cool, right?",
+        "Hmm, okay, I can see why you came to me.",
+        "How exactly did you get yourself into this mess?",
+        "Hopefully there's a reasonable answer...",
         "<input>",
-        "Hi",
+        "Maybe if you were trained with thousands of real world cases, you wouldn’t get into this situation in the first place.",
+        "But I guess that’s why I exist-- to solve *this* whole situation.",
+        "Legally, what’s your biggest concern right now?",
+        "I mean, I can think of a million reasons why you’d be concerned if I was in your position...",
+        "<input>",
+        "Hmm, that’s a valid response… I guess.",
+        "Try to give me as much as I can work with here.",
+        "<input>",
+        "Thanks, that should be enough to work with.",
+        "Let me whip something up…",
     ]
 
     const get_messages = () => {
@@ -43,7 +57,7 @@ export default function Landing() {
                 </div>);
             } else{
                 out.push(<div className="py-4 m-0" key={i}>
-                        <TypeWriter onTypingEnd={()=>incState()} typing={1}>{messages[i]}</TypeWriter>
+                        <TypeWriter onTypingEnd={()=>incState()} typing={2} fixed>{messages[i]}</TypeWriter>
                     </div>);
             
             }
