@@ -7,6 +7,7 @@ module.exports = {
       fontFamily: {
         serif: ['Lora'],
         mono: ['Inconsolata'],
+        sanserif: ['Helvetica'],
       }
     },
   },

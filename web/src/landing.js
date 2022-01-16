@@ -55,7 +55,7 @@ export default function Landing() {
                 const tag = messages[i].split('<input=')[1].split('>')[0];
                 out.push(
                 <div key={i} className="flex resize-none flex-column flex-none">
-                    <textarea className="resize-none flex-wrap outline outline-1 text-right w-full outline-0 border-none font-mono text-area-padding"></textarea>
+                    <textarea autoFocus className="resize-none flex-wrap outline outline-1 text-right w-full outline-0 border-none font-mono text-area-padding"></textarea>
                     {
                         i === state-1 ?
                         <button className="font-serif bg-black text-white rounded-md" 
@@ -98,16 +98,17 @@ export default function Landing() {
                         <div className="py-1 m-0 font-serif text-5xl text-left tracking-wide">
                             AdvocAI
                         </div>
-                        <div className="py-0 m-0 font-serif text-2xl italic">
+                        <div className="py-0 m-0 font-serif text-2xl italic ">
                             Your AI Lawyer.
                         </div>
                         <div className="pt-3">
                             <button className="font-serif bg-black text-white rounded-md p-2" onClick={()=>setState(1)}>Consult</button>
                         </div>
                     </div>
-                    <div>
-                        <div className="flex alight-left justify-left pb-5 pl-5">A project by Team Valley</div>
-                        <div className="flex text-xs align-text-bottom justify-center pb-2">Disclaimer: The information provided on this website does not, and is not intended to, constitute legal advice.</div>    
+                    <div className="flex justify-between">
+                        <div className="flex alight-left justify-left align-center pb-5 pl-5 h-full">A project by Team Valley</div>
+                        <div className="flex text-xs align-text-bottom align-center justify-center pb-2 h-full">Disclaimer: The information provided on this website does not, and is not intended to, constitute real legal advice.</div>    
+                        <div className="flex alight-left justify-left pb-5 pl-5 opacity-0">A project by Team Valley</div>
                     </div>
                 </div>}
             </Transition>
