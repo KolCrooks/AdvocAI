@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Transition } from "react-transition-group";
+import {HiCheck} from "react-icons/hi"
 import TypeWriter from "react-typewriter";
-import RobotMessage from "./roboMessage";
 import "./index.css";
 
 const duration = 800;
@@ -50,8 +50,8 @@ export default function Landing() {
 
     const get_messages = () => {
         const out = [];
-        for(let i = 0; i < state && i < messages.length; i++) {
-            if(messages[i].startsWith('<input')){
+        for (let i = 0; i < state && i < messages.length; i++) {
+            if (messages[i].startsWith('<input')){
                 const tag = messages[i].split('<input=')[1].split('>')[0];
                 out.push(
                 <div key={i} class="user-input">
@@ -62,11 +62,11 @@ export default function Landing() {
                         onClick={()=> {
                             setMessage(m => {m[tag] = document.getElementById(i + "_QUESTION").value; return {...m}});
                             setState(j=> j+1)
-                        }}>Submit</button>
+                        }}><HiCheck /></button>
                     : <></>
                     }
                 </div>);
-            } else{
+            } else {
                 out.push(<div className="ai-output py-4 m-0" key={i}>
                         <TypeWriter onTypingEnd={()=>incState()} typing={2} fixed>{messages[i]}</TypeWriter>
                     </div>);
@@ -102,10 +102,10 @@ export default function Landing() {
                             Your AI Lawyer.
                         </div>
                         <div className="pt-3">
-                            <button className="font-serif bg-black text-white rounded-md p-2" onClick={()=>setState(1)}>Consult.</button>
+                            <button className="font-serif bg-black text-white rounded-md p-2 m-4" onClick={()=>setState(1)}>Consult.</button>
                         </div>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between items-center">
                         <div className="flex alight-left justify-left align-center pb-5 pl-5 h-full">A project by Team Valley</div>
                         <div className="flex text-xs align-text-bottom align-center justify-center pb-2 h-full">Disclaimer: The information provided on this website does not, and is not intended to, constitute real legal advice.</div>    
                         <div className="flex alight-left justify-left pb-5 pl-5 opacity-0">A project by Team Valley</div>
@@ -119,6 +119,7 @@ export default function Landing() {
                         ...defaultStyle,
                         ...transitionStyles[state]
                       }}>
+                    <div p-2></div>
                     <div>
                         {get_messages()}
                     </div>
