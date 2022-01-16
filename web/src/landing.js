@@ -70,8 +70,16 @@ export default function Landing() {
                 const tag = dialog[i].split('<input=')[1].split('>')[0];
                 out.push(
                 <div key={i} className="flex resize-none flex-column flex-none">
-                    <TextareaAutosize autoFocus className="resize-none flex-wrap p-1.5 h-min half-margin w-full outline-1 border-none rounded-md outline font-sanserif" disabled={i !== state-1}></TextareaAutosize>
-                    <button className="font-serif text-black rounded-full ml-4 mr-20 transition-opacity"
+                    <TextareaAutosize autoFocus className="resize-none text-right flex-wrap p-1.5 h-min half-margin w-full outline-1 border-none rounded-md outline font-md text-gray-500 transition-all"
+                        onKeyDown={e => {// Enter pressed
+                            if (e.keyCode == 13)
+                            {
+                                //method to prevent from default behaviour
+                                e.preventDefault();
+                            }}}
+                        disabled={i !== state-1}
+                        style={{outline: i !== state-1 ? 'none' : 'solid'}}></TextareaAutosize>
+                    <button className="font-serif text-black rounded-full ml-4 mr-20 transition-opacity" disabled={i !== state-1}
                         style= {{
                             opacity: i === state-1 ? 1 : 0,
                         }}
@@ -128,7 +136,7 @@ export default function Landing() {
                             AdvocAI
                         </div>
                         <div className="py-0 m-0 font-serif text-2xl italic ">
-                            Your AI Lawyer.
+                            Your AI Advocate.
                         </div>
                         <div className="pt-3">
                             <button className="font-serif bg-black text-white rounded-md p-2 m-2" onClick={()=>setState(1)}>Consult</button>
@@ -136,7 +144,7 @@ export default function Landing() {
                     </div>
                     <div className="flex justify-between items-end bottom-0 absolute w-full">
                         <div className="flex alight-left justify-left align-center pb-5 pl-5 h-full">A project by Team Valley</div>
-                        <div className="flex text-xs align-text-bottom align-center justify-center pb-2 h-full opacity-20">Disclaimer: The information provided on this website does not, and is not intended to, constitute real legal advice.</div>    
+                        <div className="flex text-xs align-text-bottom align-center justify-center pb-2 h-full opacity-60">Disclaimer: The information provided on this website does not, and is not intended to, constitute real legal advice.</div>    
                         <div className="flex alight-left justify-left pb-5 pl-5 opacity-0">A project by Team Valley</div>
                     </div>
                 </div>}
