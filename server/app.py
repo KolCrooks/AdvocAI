@@ -1,27 +1,65 @@
-from fastapi import FastAPI
-import sys
+from fastapi import FastAPI, Request, Response
+import os
 import openai
+import random
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
+from fastapi.middleware.cors import CORSMiddleware
 
 
 limiter = Limiter(key_func=get_remote_address)
-openai.api_key = sys.env('OPENAI_API_KEY')
-model = sys.env('OPENAI_MODEL')
+openai.api_key = os.getenv('OPENAI_API_KEY')
+model = 'babbage:ft-personal-2022-01-16-00-45-51'
+
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8080",
+    "http://localhost:3000",
+]
+
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 
 @app.get("/")
-def read_root():
+def root():
     return {"Hello": "World"}
 
 
 @app.get("/completion/")
 @limiter.limit("10/minute")
-def read_item(q: str):
-    completion = openai.Completion.create(model=model, prompt="Hello world")
-    return {"data": completion.choices[0].text}
+def get_response(request: Request, response: Response):
+    question = request.query_params.get('question').replace('###', '').replace(
+        'END', '').replace('Q:', '').replace('T:', '').replace('B:', '')
+    body = request.query_params.get('body').replace('###', '').replace(
+        'END', '').replace('Q:', '').replace('T:', '').replace('B:', '')
+
+    if random.random() < 1:
+        t = 'GOOD'
+    else:
+        t = 'BAD'
+    prompt = f" Q: {question}\nT: {t}\nB: {body}\n\n###\n\n"
+
+    if not prompt:
+        response.status_code = 400
+        return {"error": "prompt is required"}
+    completion = openai.Completion.create(
+        max_tokens=150,
+        model=model, prompt=prompt)
+    print(completion)
+    cleaned = completion.choices[0].text.replace('END', '').replace(
+        'IANAL', 'I am not a lawyer').replace('NAL', 'Not a lawyer')
+
+    return {"data": cleaned}
