@@ -55,12 +55,14 @@ export default function Landing() {
                 const tag = messages[i].split('<input=')[1].split('>')[0];
                 out.push(
                 <div key={i} className="flex resize-none flex-column flex-none">
-                    <textarea autoFocus className="resize-none flex-wrap outline outline-1 text-right w-full outline-0 border-none font-mono text-area-padding"></textarea>
+                    <textarea autoFocus className="resize-none flex-wrap text-right w-full outline-0 border-none font-mono text-area-padding"></textarea>
                     {
                         i === state-1 ?
                         <button className="font-serif bg-black text-white rounded-md" 
                         onClick={()=> {
-                            setMessage(m => {m[tag] = document.getElementById(i + "_QUESTION").value; return {...m}});
+                            if (document.getElementById(i + "_QUESTION") != null) {
+                                setMessage(m => {m[tag] = document.getElementById(i + "_QUESTION").value; return {...m}});
+                            }
                             setState(j=> j+1)
                         }}>Submit</button>
                     : <></>
