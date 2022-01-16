@@ -36,6 +36,11 @@ app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 
+@app.get("/")
+def root(request: Request, response: Response):
+    return FileResponse('../web/build/index.html')
+
+
 @app.get("/completion")
 @limiter.limit("10/minute")
 def get_response(request: Request, response: Response):
@@ -64,4 +69,4 @@ def get_response(request: Request, response: Response):
     return {"data": cleaned}
 
 
-app.mount("/", StaticFiles(directory="./web/build", html=True))
+app.mount("/", StaticFiles(directory="../web/build"))
