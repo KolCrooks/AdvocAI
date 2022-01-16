@@ -1,6 +1,6 @@
 import "./testimonial.css";
 
-function Testimonial({name, message}) {
+function Testimonial({name, img, message}) {
     return(
         <div class="testimonial">
             <h2 class="testimonial">
