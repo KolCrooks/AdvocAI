@@ -7,7 +7,6 @@ import Intro from './intro';
 ReactDOM.render(
   <React.StrictMode>
     <Intro />
-    {/* <Simpletextarea /> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
