@@ -16,6 +16,7 @@ const transitionStyles = {
     exited:  { opacity: 0, display: 'none' },
 };
 
+
 export default function Landing() {
     const [state, setState] = useState(0);
     const incState = () => setState(state+1);
@@ -56,7 +57,7 @@ export default function Landing() {
                     }
                 </div>);
             } else{
-                out.push(<div className="py-4 m-0" key={i}>
+                out.push(<div className="py-4 m-0 font-mono" key={i} >
                         <TypeWriter onTypingEnd={()=>incState()} typing={2} fixed>{messages[i]}</TypeWriter>
                     </div>);
             
