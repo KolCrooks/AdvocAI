@@ -108,7 +108,7 @@ export default function Landing() {
                 const question = message.question;
                 const body = `${message.cause}\n ${message.details}\n ${message.concern}`;
 
-                fetch(`/completion?question=${question}&body=${body}`)
+                fetch(`https://api.advocai.tech/completion?question=${question}&body=${body}`)
                     .then(res => res.json())
                     .then(res => {
                         dialog[dialog.length - 1] = `${res.data}`;
