@@ -7,8 +7,6 @@ from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
 
 
 limiter = Limiter(key_func=get_remote_address)
@@ -34,11 +32,6 @@ app.add_middleware(
 )
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
-
-
-@app.get("/")
-def root(request: Request, response: Response):
-    return FileResponse('./web/build/index.html')
 
 
 @app.get("/completion")
@@ -67,6 +60,3 @@ def get_response(request: Request, response: Response):
         'IANAL', 'I am not a lawyer').replace('NAL', 'Not a lawyer')
 
     return {"data": cleaned}
-
-
-app.mount("/", StaticFiles(directory="./web/build"))
