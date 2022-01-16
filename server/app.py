@@ -56,6 +56,7 @@ def get_response(request: Request, response: Response):
     completion = openai.Completion.create(
         max_tokens=150,
         temperature=0.9,
+        stop=" END",
         model=model, prompt=prompt)
     print(completion)
     cleaned = completion.choices[0].text.split('END')[0].replace(
