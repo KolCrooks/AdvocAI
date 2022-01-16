@@ -1,10 +1,29 @@
 :root {
-  --clr-dark: maroon;
-  --clr-light: white; 
+  --clr-dark: #454f41; 
+  --clr-light: #f7eaa6; 
+  --clr-alt: #1e1e15;
+
+  --fs-large: 2.5em;
+  --fs-medium: 2em;
+  --fs-small: 1em;
+
+  --fw-bold: 800;
 }
 
 *{
   background: var(--clr-dark);
+}
+
+h1 {
+  font-size: var(--fs-large);
+}
+
+h2 {
+  font-size: var(--fs-medium);
+}
+
+h3 {
+  font-size: var(--fs-small);
 }
 
 body {
@@ -14,6 +33,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
   color: var(--clr-light);
 }
 
@@ -22,3 +42,15 @@ code {
     monospace;
 }
 
+.section-title,
+.section-subtitle {
+  text-align: center;
+}
+
+.section-title {
+  font-size: var(--fs-large);
+}
+
+.section-subtitle {
+  font-size: var(--fs-medium);
+}

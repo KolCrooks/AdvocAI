@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Intro from './intro';
+import Testimonials from './testimonials';
 
 ReactDOM.render(
   <React.StrictMode>
     <Intro />
+    <Testimonials />
   </React.StrictMode>,
   document.getElementById('root')
 );

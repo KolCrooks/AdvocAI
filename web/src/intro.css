@@ -34,6 +34,7 @@
     background-color: var(--clr-light);
     color: var(--clr-dark);
     margin-left: 2em;
+    font-weight: var(--fw-bold);
 }
 
 .outputArea {
