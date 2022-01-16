@@ -60,7 +60,9 @@ export default function Landing() {
                         i === state-1 ?
                         <button className="font-serif bg-black text-white rounded-md" 
                         onClick={()=> {
-                            setMessage(m => {m[tag] = document.getElementById(i + "_QUESTION").value; return {...m}});
+                            if (document.getElementById(i + "_QUESTION") != null) {
+                                setMessage(m => {m[tag] = document.getElementById(i + "_QUESTION").value; return {...m}});
+                            }
                             setState(j=> j+1)
                         }}><HiCheck /></button>
                     : <></>
