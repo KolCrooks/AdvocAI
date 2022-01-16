@@ -10,7 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 limiter = Limiter(key_func=get_remote_address)
 openai.api_key = os.getenv('OPENAI_API_KEY')
-model = 'babbage:ft-personal-2022-01-16-00-45-51'
+model = 'curie:ft-personal-2022-01-16-03-36-46'
 
 origins = [
     "http://localhost.tiangolo.com",
@@ -45,21 +45,20 @@ def get_response(request: Request, response: Response):
         'END', '').replace('Q:', '').replace('T:', '').replace('B:', '')
     body = request.query_params.get('body').replace('###', '').replace(
         'END', '').replace('Q:', '').replace('T:', '').replace('B:', '')
+    if len(question) + len(body) > 500:
+        return {"error": "Question or body too long"}
 
-    if random.random() < 1:
-        t = 'GOOD'
-    else:
-        t = 'BAD'
-    prompt = f" Q: {question}\nT: {t}\nB: {body}\n\n###\n\n"
+    prompt = f" Q: {question}\nT: GOOD\nB: {body}\n\n###\n\n"
 
     if not prompt:
         response.status_code = 400
         return {"error": "prompt is required"}
     completion = openai.Completion.create(
         max_tokens=150,
+        temperature=0.9,
         model=model, prompt=prompt)
     print(completion)
-    cleaned = completion.choices[0].text.replace('END', '').replace(
+    cleaned = completion.choices[0].text.split('END')[0].replace(
         'IANAL', 'I am not a lawyer').replace('NAL', 'Not a lawyer')
 
     return {"data": cleaned}
