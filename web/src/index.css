@@ -21,14 +21,11 @@
   }
 }
 
+
+
 @font-face {
   font-family: Lora;
   src: url(/public/Lora.ttf);
-}
-
-@font-face {
-  font-family: Inconsolata;
-  src: url(/public/Inconsolata.ttf);
 }
 
 #root {
@@ -48,12 +45,15 @@
 }
 
 .ai-output {
-  margin-left: 10%;
-  margin-right: auto;
-  display: flex; 
-  flex-direction: column;
   width: 40%;
-  justify-content: left; 
   font-family: monospace;
   font-size: 1.2em; 
+}
+
+.text-padding {
+  padding-left: 20%;
+}
+
+.text-area-padding {
+  padding-right: 20%;
 }
