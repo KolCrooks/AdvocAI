@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/AdvocAI/static/css/main.33d249e0.css",
-    "main.js": "/AdvocAI/static/js/main.6fb49d2b.js",
+    "main.js": "/AdvocAI/static/js/main.a857d4d4.js",
     "static/media/Lora.ttf": "/AdvocAI/static/media/Lora.05e77ab0811155f66e9b.ttf",
     "static/media/Inconsolata.ttf": "/AdvocAI/static/media/Inconsolata.ed7f6e5be703abdc4a71.ttf",
     "index.html": "/AdvocAI/index.html",
     "main.33d249e0.css.map": "/AdvocAI/static/css/main.33d249e0.css.map",
-    "main.6fb49d2b.js.map": "/AdvocAI/static/js/main.6fb49d2b.js.map"
+    "main.a857d4d4.js.map": "/AdvocAI/static/js/main.a857d4d4.js.map"
   },
   "entrypoints": [
     "static/css/main.33d249e0.css",
-    "static/js/main.6fb49d2b.js"
+    "static/js/main.a857d4d4.js"
   ]
 }
