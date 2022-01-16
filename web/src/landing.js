@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Transition } from "react-transition-group";
 import {HiCheck} from "react-icons/hi"
 import TypeWriter from "react-typewriter";
+import TextareaAutosize from 'react-textarea-autosize';
 import "./index.css";
 
 const duration = 800;
@@ -17,6 +18,11 @@ const transitionStyles = {
     exited:   { opacity: 0, display: 'none' },
 };
 
+const AlwaysScrollToBottom = () => {
+    const elementRef = useRef();
+    useEffect(() => elementRef.current.scrollIntoView());
+    return <div ref={elementRef} />;
+  };
 
 export default function Landing() {
     const [state, setState] = useState(0);
@@ -55,22 +61,31 @@ export default function Landing() {
                 const tag = messages[i].split('<input=')[1].split('>')[0];
                 out.push(
                 <div key={i} className="flex resize-none flex-column flex-none">
-                    <textarea autoFocus className="resize-none flex-wrap text-right w-full outline-0 border-none font-mono text-area-padding"></textarea>
-                    {
-                        i === state-1 ?
-                        <button className="font-serif bg-black text-white rounded-md" 
-                        onClick={()=> {
-                            if (document.getElementById(i + "_QUESTION") != null) {
-                                setMessage(m => {m[tag] = document.getElementById(i + "_QUESTION").value; return {...m}});
-                            }
-                            setState(j=> j+1)
-                        }}><HiCheck /></button>
-                    : <></>
-                    }
+                    <TextareaAutosize autoFocus className="resize-none text-right flex-wrap p-1.5 h-min half-margin w-full outline-1 border-none rounded-md outline font-md text-gray-500 transition-all"
+                        onKeyDown={e => {// Enter pressed
+                            if (e.keyCode == 13)
+                            {
+                                //method to prevent from default behaviour
+                                e.preventDefault();
+                            }}}
+                        disabled={i !== state-1}
+                        style={{outline: i !== state-1 ? 'none' : 'solid'}}></TextareaAutosize>
+                    <button className="font-serif text-black rounded-full ml-4 mr-20 transition-opacity" disabled={i !== state-1}
+                        style= {{
+                            opacity: i === state-1 ? 1 : 0,
+                        }}
+                    onClick={()=> {
+                        if(i !== state-1) return; 
+                        if (document.getElementById(i + "_QUESTION") != null) {
+                            setMessage(m => {m[tag] = document.getElementById(i + "_QUESTION").value; return {...m}});
+                        }
+                        setState(j=> j+1)
+                    }}><HiCheck size={30} /></button>
+                    
                 </div>);
             } else{
                 out.push(<div className="ai-output py-4 flex-non" key={i}>
-                        <TypeWriter onTypingEnd={()=>incState()} typing={2}>{messages[i]}</TypeWriter>
+                        <TypeWriter onTypingEnd={()=>incState()} typing={3}>{messages[i]}</TypeWriter>
                     </div>);
             
             }
@@ -101,10 +116,10 @@ export default function Landing() {
                             AdvocAI
                         </div>
                         <div className="py-0 m-0 font-serif text-2xl italic ">
-                            Your AI Lawyer.
+                            Your AI Advocate.
                         </div>
                         <div className="pt-3">
-                            <button className="font-serif bg-black text-white rounded-md p-2" onClick={()=>setState(1)}>Consult</button>
+                            <button className="font-serif bg-black text-white rounded-md p-2 m-2" onClick={()=>setState(1)}>Consult</button>
                         </div>
                     </div>
                     <div className="flex justify-between items-end bottom-0 absolute w-full">
@@ -122,7 +137,10 @@ export default function Landing() {
                         ...transitionStyles[state]
                       }}>
                     <div>
+                        <div className="p-16"></div>
                         {get_messages()}
+                        <div className="p-20"></div>
+                        <AlwaysScrollToBottom/>
                     </div>
                 </div>}
             </Transition>
