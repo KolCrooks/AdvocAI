@@ -10,6 +10,19 @@ for file in os.listdir('./submissions'):
 
 transformed_data = []
 
+
+def filter_post(s: str):
+    for start in ["**No Clear", "*Your", "**Generally", "**Bad", "[removed]", "[deleted]"]:
+        if s.startswith(start):
+            return False
+    return True
+
+
+def sanitize(s):
+    return s.replace('###', '').replace(
+        'END', '').replace('Q:', '').replace('T:', '').replace('B:', '')
+
+
 for d in data:
     d['comments'].sort(key=lambda x: x['score'])
     cnt = 0
@@ -18,18 +31,15 @@ for d in data:
         continue
     for i in range(2):
         c_good = d['comments'][-i-1]
-        if c_good['body'] != "[removed]" and not c_good['body'].startswith('**No Clear Legal Question**'):
+        if filter_post(c_good['body']):
             selected.append((c_good, "GOOD"))
         c_bad = d['comments'][i]
-        if c_bad['body'] != "[removed]" and not c_bad['body'].startswith('**No Clear Legal Question**'):
+        if filter_post(c_bad['body']):
             selected.append((c_bad, "BAD"))
 
-    # WE MUST REMOVE '###' from the DATA
-    d['title'] = d['title'].replace('###', '').replace(
-        'END', '').replace('Q:', '').replace('T:', '').replace('B:', '')
-    # WE MUST REMOVE 'END' from the DATA
-    d['body'] = d['body'].replace('###', '').replace(
-        'END', '').replace('Q:', '').replace('T:', '').replace('B:', '')
+    d['title'] = sanitize(d['title'])
+    d['body'] = sanitize(d['body'])
+
     transformed_data += [{
         'prompt': f" Q: {d['title']}\nT: {type}\nB: {d['body']}\n\n###\n\n",
         'completion': f"{comment['body']} END",
