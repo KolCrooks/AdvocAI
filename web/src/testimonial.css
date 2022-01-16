@@ -1,0 +1,18 @@
+.section-testimonials,
+.section-title-testimonials,
+.section-subtitle-testimonials {
+    background: var(--clr-alt);
+}
+
+.testimonial {
+    background: var(--clr-alt); 
+}
+
+.testimonial-items {
+    display: flex;
+    flex-direction: row;
+    background: var(--clr-light);
+    flex-flow: column wrap;
+    align-items: flex-start;
+    max-width: 300px;
+}
