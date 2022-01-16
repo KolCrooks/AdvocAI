@@ -1,6 +1,6 @@
 # AdvocAI
 ## Your AI Lawyer
-Have you ever wished you could instantly ask for legal advice? The wait is over - AdvocAI is at your service! 
+Have you ever wished you could instantly ask for legal advAIce? The wait is over - AdvocAI is at your service! 
 <br><br>
 
 ## Getting Started
@@ -23,7 +23,7 @@ Make sure you have `npm` and Node.js v10+ installed. If you don't have them yet 
 <br><br>
 
 ## Purpose
-AdvocAI is trained with data collected from thousands of legal advice-related posts from real users on Reddit. Why ask thousands of people when you can ask a designated AI once? From the data, AdvocAI generates the most appropriate advice and presents it to the user - YOU!
+AdvocAI is tuned with data collected from thousands of legal advice-related posts from real users on Reddit. From the data, AdvocAI generates the most appropriate advice learned through machine learning and extrapolation, and presents it to the user - YOU!
 <br><br>
 
 ## Technologies 
@@ -35,7 +35,7 @@ We implemented the back-end with FastAPI to serve completion requests. The front
 <br><br>
 
 ## AdvocAI's Future 
-The future for AdvocAI is promising! The current model only uses training from approximately 4000 most upvoted comments on the posts to give recommendations. 
+The future for AdvocAI is promising! The current model only uses training from approximately 2000 most upvoted comments on the posts to give recommendations. 
 
 Given more time, more posts and comments can be scraped from the internet. The current deployed version of the AdvocAI model provides fairly relevant recommendations regardless of the absurdity of the question. However, with additional data, more precise and relevant responses can be achieved. 
 
