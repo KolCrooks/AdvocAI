@@ -53,7 +53,7 @@ export default function Landing() {
                 const tag = messages[i].split('<input=')[1].split('>')[0];
                 out.push(
                 <div key={i}>
-                    <input className="outline outline-1 w-min" id={i + "_QUESTION"}></input>
+                    <input autoFocus className="outline-b" id={i + "_QUESTION"}></input>
                     {
                         i === state-1 ?
                         <button className="font-serif bg-black text-white rounded-md p-2" 
@@ -66,7 +66,7 @@ export default function Landing() {
                 </div>);
             } else{
                 out.push(<div className="py-4 m-0 font-mono" key={i} >
-                        <TypeWriter onTypingEnd={()=>incState()} typing={2} fixed>{messages[i]}</TypeWriter>
+                        <TypeWriter onTypingEnd={()=>incState()} typing={9} fixed>{messages[i]}</TypeWriter>
                     </div>);
             
             }
@@ -96,7 +96,7 @@ export default function Landing() {
                     <div className="py-0 m-0 font-serif text-2xl italic">
                         Your AI Lawyer.
                     </div>
-                    <button className="font-serif bg-black text-white rounded-md p-2" onClick={()=>setState(1)}>Help me.</button>
+                    <button className="font-serif bg-black text-white rounded-md p-2 m-2" onClick={()=>setState(1)}>Help me.</button>
                 </div>}
             </Transition>
             <Transition in={state !== 0} timeout={duration}>
