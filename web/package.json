@@ -21,7 +21,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "react-scripts build && echo 'advocai.tech' > ./build/CNAME && gh-pages -d build"
+    "deploy": "react-scripts build && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -50,5 +50,6 @@
   },
   "resolutions": {
     "mini-css-extract-plugin": "2.4.7"
-  }
+  },
+  "homepage": "https://kolcrooks.github.io/AdvocAI/"
 }

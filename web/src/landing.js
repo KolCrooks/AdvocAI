@@ -35,23 +35,23 @@ export default function Landing() {
     const forceUpdate = useForceUpdate();
 
     const [dialog, setDialog] = useState([
-        "> I’m AdvocAI, your AI advocate.",
-        "> Using the advice of thousands of internet commenters, I've been built to give you legal advice.",
-        "> I mean, not sure why you’d go to a lawyer in the first place… unless you’re into the pretentious suits and overpriced rates.",
-        "> Let’s get down to business… could you briefly describe your legal issues for me?",
+        // "> I’m AdvocAI, your AI advocate.",
+        // "> Using the advice of thousands of internet commenters, I've been built to give you legal advice.",
+        // "> I mean, not sure why you’d go to a lawyer in the first place… unless you’re into the pretentious suits and overpriced rates.",
+        // "> Let’s get down to business… could you briefly describe your legal issues for me?",
         "> You don’t need to go into a ton of detail, I just need enough to know what sort of mess you got yourself into.",
         "<input=question>",
-        "> Hmm, okay, I can see why you came to me.",
-        "> How exactly did you get yourself into this mess?",
+        // "> Hmm, okay, I can see why you came to me.",
+        // "> How exactly did you get yourself into this mess?",
         "> Hopefully there's a reasonable answer...",
         "<input=cause>",
-        "> Maybe if you were trained with thousands of real world cases, you wouldn’t get into this situation in the first place.",
-        "> But I guess that’s why I exist-- to solve *this* whole situation.",
-        "> Legally, what’s your biggest concern right now?",
+        // "> Maybe if you were trained with thousands of real world cases, you wouldn’t get into this situation in the first place.",
+        // "> But I guess that’s why I exist-- to solve *this* whole situation.",
+        // "> Legally, what’s your biggest concern right now?",
         "> I mean, I can think of a million reasons why you’d be concerned if I was in your position...",
         "<input=concern>",
-        "> Hmm, that’s a valid response… I guess.",
-        "> Is there anything else I should know?", 
+        // "> Hmm, that’s a valid response… I guess.",
+        // "> Is there anything else I should know?", 
         "> Try to give me as much as I can work with here.",
         "<input=details>",
         "> Thanks, that should be enough to work with.",
@@ -70,7 +70,7 @@ export default function Landing() {
                 const tag = dialog[i].split('<input=')[1].split('>')[0];
                 out.push(
                 <div key={i} className="flex resize-none flex-column flex-none">
-                    <TextareaAutosize autoFocus className="resize-none text-right flex-wrap p-1.5 h-min half-margin w-full outline-1 border-none rounded-md outline font-md text-gray-500 transition-all"
+                    <TextareaAutosize id={i + "_QUESTION"} autoFocus className="resize-none text-right flex-wrap p-1.5 h-min half-margin w-full outline-1 border-none rounded-md outline font-md text-gray-500 transition-all"
                         onKeyDown={e => {// Enter pressed
                             if (e.keyCode == 13)
                             {
@@ -85,9 +85,8 @@ export default function Landing() {
                         }}
                     onClick={()=> {
                         if(i !== state-1) return; 
-                        if (document.getElementById(i + "_QUESTION") != null) {
                             setMessage(m => {m[tag] = document.getElementById(i + "_QUESTION").value; return {...m}});
-                        }
+                        
                         setState(j=> j+1)
                     }}><HiCheck size={30} /></button>
                     
@@ -108,7 +107,7 @@ export default function Landing() {
                 const question = message.question;
                 const body = `${message.cause}\n ${message.details}\n ${message.concern}`;
 
-                fetch(`https://api.advocai.tech/completion?question=${question}&body=${body}`)
+                fetch(`https://valley-22.herokuapp.com/completion?question=${question}&body=${body}`)
                     .then(res => res.json())
                     .then(res => {
                         dialog[dialog.length - 1] = `${res.data}`;

@@ -14,10 +14,7 @@ openai.api_key = os.getenv('OPENAI_API_KEY')
 model = 'curie:ft-personal-2022-01-16-03-36-46'
 
 origins = [
-    "http://localhost:8080",
-    "http://localhost:3000",
-    "https://advocai.tech",
-    "https://kolcrooks.github.io"
+    "*"
 ]
 
 
