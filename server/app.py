@@ -64,4 +64,4 @@ def get_response(request: Request, response: Response):
     return {"data": cleaned}
 
 
-app.mount("/", StaticFiles(directory="../web/build", html=True))
+app.mount("/", StaticFiles(directory="./web/build", html=True))
