@@ -2,15 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Simpletextarea from './textArea';
 import Intro from './intro';
-import Testimonial from './testimonial';
 
 ReactDOM.render(
   <React.StrictMode>
     <Intro />
     {/* <Simpletextarea /> */}
-    <Testimonial />
   </React.StrictMode>,
   document.getElementById('root')
 );
