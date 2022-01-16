@@ -13,7 +13,7 @@ const transitionStyles = {
     entering: { opacity: 0 },
     entered:  { opacity: 1 },
     exiting:  { opacity: 0 },
-    exited:  { opacity: 0, display: 'none' },
+    exited:   { opacity: 0, display: 'none' },
 };
 
 
@@ -37,6 +37,7 @@ export default function Landing() {
         "I mean, I can think of a million reasons why you’d be concerned if I was in your position...",
         "<input>",
         "Hmm, that’s a valid response… I guess.",
+        "Is there anything else I should know?", 
         "Try to give me as much as I can work with here.",
         "<input>",
         "Thanks, that should be enough to work with.",
