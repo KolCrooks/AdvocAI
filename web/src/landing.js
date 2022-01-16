@@ -124,7 +124,7 @@ export default function Landing() {
                     </div>
                     <div className="flex justify-between items-end bottom-0 absolute w-full">
                         <div className="flex alight-left justify-left align-center pb-5 pl-5 h-full">A project by Team Valley</div>
-                        <div className="flex text-xs align-text-bottom align-center justify-center pb-2 h-full opacity-20">Disclaimer: The information provided on this website does not, and is not intended to, constitute real legal advice.</div>    
+                        <div className="flex text-xs align-text-bottom align-center justify-center pb-2 h-full opacity-60">Disclaimer: The information provided on this website does not, and is not intended to, constitute real legal advice.</div>    
                         <div className="flex alight-left justify-left pb-5 pl-5 opacity-0">A project by Team Valley</div>
                     </div>
                 </div>}
