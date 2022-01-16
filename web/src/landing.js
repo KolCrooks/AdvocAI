@@ -54,11 +54,11 @@ export default function Landing() {
             if(messages[i].startsWith('<input')){
                 const tag = messages[i].split('<input=')[1].split('>')[0];
                 out.push(
-                <div key={i} class="user-input">
-                    <textarea className="resize-none flex-wrap outline outline-1 text-right w-full outline-0 border-none font-mono"></textarea>
+                <div key={i} className="flex resize-none flex-column flex-none">
+                    <textarea className="resize-none flex-wrap outline outline-1 text-right w-full outline-0 border-none font-mono text-area-padding"></textarea>
                     {
                         i === state-1 ?
-                        <button className="font-serif bg-black text-white rounded-md p-2" 
+                        <button className="font-serif bg-black text-white rounded-md" 
                         onClick={()=> {
                             setMessage(m => {m[tag] = document.getElementById(i + "_QUESTION").value; return {...m}});
                             setState(j=> j+1)
@@ -67,8 +67,8 @@ export default function Landing() {
                     }
                 </div>);
             } else{
-                out.push(<div className="ai-output py-4 m-0" key={i}>
-                        <TypeWriter onTypingEnd={()=>incState()} typing={2} fixed>{messages[i]}</TypeWriter>
+                out.push(<div className="ai-output py-4 flex-non" key={i}>
+                        <TypeWriter onTypingEnd={()=>incState()} typing={2}>{messages[i]}</TypeWriter>
                     </div>);
             
             }
@@ -102,7 +102,7 @@ export default function Landing() {
                             Your AI Lawyer.
                         </div>
                         <div className="pt-3">
-                            <button className="font-serif bg-black text-white rounded-md p-2" onClick={()=>setState(1)}>Help me.</button>
+                            <button className="font-serif bg-black text-white rounded-md p-2" onClick={()=>setState(1)}>Consult</button>
                         </div>
                     </div>
                     <div>
@@ -113,7 +113,7 @@ export default function Landing() {
             </Transition>
             <Transition in={state !== 0} timeout={duration}>
                 {state =>
-                    <div className="message-page flex flex-col items-center min-h-full min-w-full"
+                    <div className="message-page flex flex-col text-padding min-h-full min-w-full"
                         style={{
                         ...defaultStyle,
                         ...transitionStyles[state]
