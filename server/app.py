@@ -38,7 +38,7 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 @app.get("/")
 def root(request: Request, response: Response):
-    return FileResponse('../web/build/index.html')
+    return FileResponse('./web/build/index.html')
 
 
 @app.get("/completion")
@@ -69,4 +69,4 @@ def get_response(request: Request, response: Response):
     return {"data": cleaned}
 
 
-app.mount("/", StaticFiles(directory="../web/build"))
+app.mount("/", StaticFiles(directory="./web/build"))
