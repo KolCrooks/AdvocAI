@@ -57,7 +57,7 @@ export default function Landing() {
                         i === state-1 ?
                         <button className="font-serif bg-black text-white rounded-md p-2" 
                         onClick={()=> {
-                            setMessage(m => m[tag] = document.getElementById(i + "_QUESTION").value);
+                            setMessage(m => {m[tag] = document.getElementById(i + "_QUESTION").value; return {...m}});
                             setState(j=> j+1)
                         }}>Submit</button>
                     : <></>
@@ -72,11 +72,13 @@ export default function Landing() {
         }
         if(state === messages.length-1) {
             // DO FINAL THING
-            const question = message.question;
-            const body = `${message.cause}\n ${message.detail}\n ${message.concern}`;
-            fetch(`https://127.0.0.1:8000/completion?question=${question}&body=${body}`)
-                .then(res => res.json())
-                .then(res => setResponse(res.data))
+            if(response === ''){
+                const question = message.question;
+                const body = `${message.cause}\n ${message.details}\n ${message.concern}`;
+                fetch(`http://127.0.0.1:8000/completion?question=${question}&body=${body}`)
+                    .then(res => res.json())
+                    .then(res => setResponse(res.data))
+            }
         }
         return out;
     }
