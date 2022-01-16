@@ -21,11 +21,14 @@
   }
 }
 
-
-
 @font-face {
   font-family: Lora;
   src: url(/public/Lora.ttf);
+}
+
+@font-face {
+  font-family: Inconsolata;
+  src: url(/public/Inconsolata.ttf);
 }
 
 #root {

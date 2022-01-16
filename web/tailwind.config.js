@@ -5,7 +5,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['Lora']
+        serif: ['Lora'],
+        mono: ['Inconsolata'],
       }
     },
   },
