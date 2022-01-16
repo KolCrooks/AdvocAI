@@ -2,13 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Intro from './intro';
+import Landing from './landing';
 import Testimonials from './testimonials';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Intro />
-    <Testimonials />
+    <Landing />
   </React.StrictMode>,
   document.getElementById('root')
 );
