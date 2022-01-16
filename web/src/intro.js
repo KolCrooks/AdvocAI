@@ -4,7 +4,7 @@ import './intro.css';
 
 function Intro() {
     return(
-        <body>
+        <div class="intro">
             <div class="title">
                 <h1>Devil's Avocado</h1>
             </div>
@@ -13,7 +13,11 @@ function Intro() {
                 <textarea class="inquiry-textarea"></textarea>
                 <button class="btn">Submit</button>
             </div>
-        </body>
+            <div class="outputArea">
+                <h3 class="output-prompt">Your attorney suggests: </h3>
+                <textarea readonly="readonly" class="output-textarea"></textarea>
+            </div>
+        </div>
     )
 }
 

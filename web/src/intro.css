@@ -1,22 +1,14 @@
-:root {
-    --clr-dark: #2f0909; 
-    --clr-light: white; 
-
-    --fs-large: 2.5em;
-    --fs-medium: 2em;
-    --fs-small: 1em;
-}
-
 .title {
     color: var(--clr-light);
     text-align: center;
-    margin-top: 200px;
-    margin-bottom: 100px;
+    margin-top: -0.5em; 
+    margin-bottom: 2em;
     font-size: var(--fs-large);
 }
 
 .inputArea {
     text-align: center;
+    margin-bottom: 2em;
 }
 
 .inquiry-prompt {
@@ -24,12 +16,15 @@
 }
 
 .inquiry-textarea { 
-    min-width: 500px;
-    min-height: 100px;
-    margin-bottom: -1.5em;
+    min-width: 50%;
+    min-height: 5em;
+    margin-bottom: -0.8em;
     margin-left: 4em;
     background-color: var(--clr-light);
     font-size: var(--fs-medium);
+    outline: none;
+    border-radius: 10px;
+    resize: none;
 }
 
 .btn {
@@ -41,3 +36,31 @@
     margin-left: 2em;
 }
 
+.outputArea {
+    padding: auto; 
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 10em;
+}
+
+.output-prompt {
+    font-size: var(--fs-medium);
+    text-align: center;
+}
+
+.output-textarea {
+    outline: none;
+    resize: none;
+    border-color: transparent;
+    background: var(--clr-light);
+    border-radius: 10px;
+    min-width: 50%;
+    min-height: 200px;
+    font-size: var(--fs-medium);
+}
+
+.output-textarea:focus {
+    outline: none
+}
