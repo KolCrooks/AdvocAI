@@ -36,3 +36,24 @@
   height: 100vh;
 }
 
+.user-input {
+  display: flex; 
+  flex-direction: column;
+  margin-left: auto; 
+  margin-right: 10%;
+  width: 40%;
+  justify-content: flex-end;
+  font-family: sans-serif;
+  font-size: 1.2em; 
+}
+
+.ai-output {
+  margin-left: 10%;
+  margin-right: auto;
+  display: flex; 
+  flex-direction: column;
+  width: 40%;
+  justify-content: left; 
+  font-family: monospace;
+  font-size: 1.2em; 
+}

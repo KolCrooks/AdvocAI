@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Transition } from "react-transition-group";
 import TypeWriter from "react-typewriter";
+import RobotMessage from "./roboMessage";
+import "./index.css";
 
 const duration = 800;
 const defaultStyle = {
@@ -52,62 +54,74 @@ export default function Landing() {
             if(messages[i].startsWith('<input')){
                 const tag = messages[i].split('<input=')[1].split('>')[0];
                 out.push(
-                <div key={i}>
-                    <input autoFocus className="outline-b" id={i + "_QUESTION"}></input>
+                <div key={i} class="user-input">
+                    <textarea className="resize-none flex-wrap outline outline-1 text-right w-full outline-0 border-none font-mono"></textarea>
                     {
                         i === state-1 ?
                         <button className="font-serif bg-black text-white rounded-md p-2" 
                         onClick={()=> {
-                            setMessage(m => m[tag] = document.getElementById(i + "_QUESTION").value);
+                            setMessage(m => {m[tag] = document.getElementById(i + "_QUESTION").value; return {...m}});
                             setState(j=> j+1)
                         }}>Submit</button>
                     : <></>
                     }
                 </div>);
             } else{
-                out.push(<div className="py-4 m-0 font-mono" key={i} >
-                        <TypeWriter onTypingEnd={()=>incState()} typing={9} fixed>{messages[i]}</TypeWriter>
+                out.push(<div className="ai-output py-4 m-0" key={i}>
+                        <TypeWriter onTypingEnd={()=>incState()} typing={2} fixed>{messages[i]}</TypeWriter>
                     </div>);
             
             }
         }
         if(state === messages.length-1) {
             // DO FINAL THING
-            const question = message.question;
-            const body = `${message.cause}\n ${message.detail}\n ${message.concern}`;
-            fetch(`https://127.0.0.1:8000/completion?question=${question}&body=${body}`)
-                .then(res => res.json())
-                .then(res => setResponse(res.data))
+            if(response === ''){
+                const question = message.question;
+                const body = `${message.cause}\n ${message.details}\n ${message.concern}`;
+                fetch(`http://127.0.0.1:8000/completion?question=${question}&body=${body}`)
+                    .then(res => res.json())
+                    .then(res => setResponse(res.data))
+            }
         }
         return out;
     }
 
     return (
-        <div>
+        <div className="Landing flex flex-col min-h-full min-w-full"> 
             <Transition in={state === 0} timeout={duration}>
-                {state => <div className="Landing flex flex-col justify-center items-center min-h-full min-w-full transition-all"
+                {state => <div className="flex flex-col grow"
                     style={{
                         ...defaultStyle,
-                        ...transitionStyles[state]
+                        ...transitionStyles[state] 
                       }}>
-                    <div className="py-1 m-0 font-serif text-5xl text-left tracking-wide">
-                        AdvocAI
+                    <div className="flex flex-col justify-center items-center grow transition-all">
+                        <div className="py-1 m-0 font-serif text-5xl text-left tracking-wide">
+                            AdvocAI
+                        </div>
+                        <div className="py-0 m-0 font-serif text-2xl italic">
+                            Your AI Lawyer.
+                        </div>
+                        <div className="pt-3">
+                            <button className="font-serif bg-black text-white rounded-md p-2" onClick={()=>setState(1)}>Help me.</button>
+                        </div>
                     </div>
-                    <div className="py-0 m-0 font-serif text-2xl italic">
-                        Your AI Lawyer.
+                    <div>
+                        <div className="flex alight-left justify-left pb-5 pl-5">A project by Team Valley</div>
+                        <div className="flex text-xs align-text-bottom justify-center pb-2">Disclaimer: The information provided on this website does not, and is not intended to, constitute legal advice.</div>    
                     </div>
-                    <button className="font-serif bg-black text-white rounded-md p-2 m-2" onClick={()=>setState(1)}>Help me.</button>
                 </div>}
             </Transition>
             <Transition in={state !== 0} timeout={duration}>
                 {state =>
-                    <div className="flex flex-col items-center min-h-full min-w-full"
+                    <div className="message-page flex flex-col items-center min-h-full min-w-full"
                         style={{
                         ...defaultStyle,
                         ...transitionStyles[state]
                       }}>
+                    <div>
                         {get_messages()}
-                    </div>}
+                    </div>
+                </div>}
             </Transition>
             {response}
         </div>
