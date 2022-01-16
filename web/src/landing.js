@@ -3,6 +3,7 @@ import { Transition } from "react-transition-group";
 import {HiCheck} from "react-icons/hi"
 import TypeWriter from "react-typewriter";
 import TextareaAutosize from 'react-textarea-autosize';
+import { Ellipsis } from "react-awesome-spinners";
 import "./index.css";
 
 const duration = 800;
@@ -23,11 +24,17 @@ const AlwaysScrollToBottom = () => {
     useEffect(() => elementRef.current.scrollIntoView());
     return <div ref={elementRef} />;
   };
+function useForceUpdate(){
+    const [value, setValue] = useState(0); // integer state
+    return () => setValue(value => value + 1); // update the state to force render
+}
 
 export default function Landing() {
     const [state, setState] = useState(0);
     const incState = () => setState(state+1);
-    const messages = [
+    const forceUpdate = useForceUpdate();
+
+    const [dialog, setDialog] = useState([
         "> I’m AdvocAI, your AI advocate.",
         "> Using the advice of thousands of internet commenters, I've been built to give you legal advice.",
         "> I mean, not sure why you’d go to a lawyer in the first place… unless you’re into the pretentious suits and overpriced rates.",
@@ -48,17 +55,19 @@ export default function Landing() {
         "> Try to give me as much as I can work with here.",
         "<input=details>",
         "> Thanks, that should be enough to work with.",
-        "> Let me whip something up…",
-    ]
+        "> Let me whip something up",
+        ""
+    ]);
 
     const [message, setMessage] = useState({});
-    const [response, setResponse] = useState("")
+    const [response, setResponse] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const get_messages = () => {
         const out = [];
-        for (let i = 0; i < state && i < messages.length; i++) {
-            if (messages[i].startsWith('<input')){
-                const tag = messages[i].split('<input=')[1].split('>')[0];
+        for (let i = 0; i < state && i < dialog.length; i++) {
+            if (dialog[i].startsWith('<input')){
+                const tag = dialog[i].split('<input=')[1].split('>')[0];
                 out.push(
                 <div key={i} className="flex resize-none flex-column flex-none">
                     <TextareaAutosize autoFocus className="resize-none flex-wrap p-1.5 h-min half-margin w-full outline-1 border-none rounded-md outline font-sanserif" disabled={i !== state-1}></TextareaAutosize>
@@ -76,24 +85,35 @@ export default function Landing() {
                     
                 </div>);
             } else{
-                out.push(<div className="ai-output py-4 flex-non" key={i}>
-                        <TypeWriter onTypingEnd={()=>incState()} typing={2}>{messages[i]}</TypeWriter>
+                out.push(<div className={"ai-output py-4 w-3/4" + (i === dialog.length-1 ? ' text-center' : '')} key={i}>
+                        <TypeWriter onTypingEnd={()=>incState()} typing={2}>
+                            {dialog[i]}
+                        </TypeWriter>
                     </div>);
             
             }
         }
-        if(state === messages.length-1) {
+        if(state === dialog.length-1) {
             // DO FINAL THING
-            if(response === ''){
+            if(response === '' && !loading) {
+                setLoading(true);
                 const question = message.question;
                 const body = `${message.cause}\n ${message.details}\n ${message.concern}`;
-                fetch(`http://127.0.0.1:8000/completion?question=${question}&body=${body}`)
+
+                fetch(`/completion?question=${question}&body=${body}`)
                     .then(res => res.json())
-                    .then(res => setResponse(res.data))
+                    .then(res => {
+                        dialog[dialog.length - 1] = `${res.data}`;
+                        console.log(dialog);
+                        setLoading(r=> false);
+                        setResponse(res.data);
+                    })
             }
         }
         return out;
     }
+    
+    
 
     return (
         <div className="Landing flex flex-col min-h-full min-w-full"> 
@@ -136,7 +156,7 @@ export default function Landing() {
                     </div>
                 </div>}
             </Transition>
-            {response}
+            
         </div>
       )
 }
