@@ -31,7 +31,7 @@ Artificial intelligence is a tuned OpenAI GPT-3 Model, trained on thousands of p
 
 Over 1000 posts of rating greater or equal to 20 were scraped and 4 comments were extracted from each post. The AI was trained for "good" and "bad" responses: the "good" comments are the two most upvoted comments, while the "bad" advice are the 2 most downvoted comments.
 
-We implemented the back-end with FastAPI to serve completion requests. The front-end is achieved through React and Tailwind. Finally, we deployed the domain on Heroku.
+We built our web app using the Python web framework FastAPI, using React and Tailwind for our frontend. In addition, our web app was deployed to Heroku. 
 <br><br>
 
 ## AdvocAI's Future 
